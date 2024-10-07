@@ -4,7 +4,7 @@
   "description": "A demo project that demonstrates how LLM ads can be implemented and blocked.",
   "main": "src/main.js",
   "scripts": {
-    "build": "postcss src/tailwind.css -o dist/tailwind.css"
+    "build": "postcss src/tailwind.css -o dist/tailwind.css && cp src/index.html dist/index.html && cp src/main.js dist/main.js"
   },
   "dependencies": {
     "tailwindcss": "^3.0.0",
