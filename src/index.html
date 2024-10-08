@@ -4,22 +4,280 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite App</title>
+  <title>LLM Ads Demo</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 
 <body>
-  <div class="mx-auto mt-6 flex max-w-sm items-center space-x-4 rounded-xl bg-white p-6 shadow-lg">
-    <div class="shrink-0">
-      <img class="h-12 w-12" src="https://mdbootstrap.com/img/new/avatars/1.jpg" alt="ChitChat Logo" />
+  <section class="bg-white dark:bg-gray-900">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+      <h1
+        class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+        LLM Ads Demo
+      </h1>
+      <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+        This is a demo website that demonstrates the future LLM ads and also
+        demonstrates how ad blockers can deal with it.
+      </p>
+      <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+        <a href="#"
+          class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+          Get started
+          <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </a>
+        <a href="#"
+          class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+          <svg class="mr-2 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z">
+            </path>
+          </svg>
+          Watch slides
+        </a>
+      </div>
+
+      <div class="px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36">
+        <span class="text-gray-400">
+          Made by AdGuard for Ad Filtering Dev Summit 2024
+        </span>
+        <div class="flex flex-wrap justify-center items-center mt-8 text-gray-500">
+          <a href="https://adguard.com/" class="mr-5 mb-5 lg:mb-0 hover:text-gray-800 dark:hover:text-gray-400">
+            <svg class="h-10" viewBox="0 0 455 102" version="1.1" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink">
+              <g id="main-logo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Elements/Logo" transform="translate(1.000000, 1.000000)">
+                  <g id="ADGUARDVPN-2" transform="translate(119.395349, 28.070175)" fill="#242424">
+                    <path
+                      d="M0,44.8580014 L19.0633804,0.441019676 L28.0867139,0.441019676 L47.1500943,44.8580014 L36.9194135,44.8580014 L32.852559,34.96656 L14.0433569,34.96656 L9.97650244,44.8580014 L0,44.8580014 Z M17.53831,26.3981778 L29.3576059,26.3981778 L23.447958,12.0965397 L17.53831,26.3981778 Z M52.2570973,44.8580014 L52.2570973,0.756033731 L69.6047735,0.756033731 C76.5523514,0.756033731 82.2289457,2.84560606 86.6347267,7.02481341 C91.0405078,11.2040208 93.2433653,16.4647029 93.2433653,22.8070175 C93.2433653,29.1073301 91.0299171,34.3575329 86.6029544,38.5577203 C82.1759917,42.7579077 76.5099881,44.8580014 69.6047735,44.8580014 L52.2570973,44.8580014 Z M62.042966,36.1006106 L69.6047735,36.1006106 C73.6292851,36.1006106 76.8700396,34.8720681 79.3270976,32.4149462 C81.7841678,29.9578243 83.0126844,26.7552134 83.0126844,22.8070175 C83.0126844,18.9008237 81.7735771,15.7087132 79.2953253,13.2305903 C76.8170734,10.7524673 73.5869218,9.51342445 69.6047735,9.51342445 L62.042966,9.51342445 L62.042966,36.1006106 Z M121.607692,45.6140351 C114.702478,45.6140351 109.078837,43.4719609 104.736601,39.1877484 C100.394365,34.9035358 98.2232791,29.4433468 98.2232791,22.8070175 C98.2232791,16.4647029 100.447318,11.0780164 104.895462,6.64679655 C109.343607,2.21557669 114.893113,0 121.544148,0 C125.399206,0 128.66113,0.493517083 131.330016,1.48056606 C133.998903,2.46761503 136.561843,3.99016773 139.018913,6.04826985 L132.855087,13.4195987 C130.991103,11.8655216 129.19069,10.7314824 127.453796,10.0174469 C125.716901,9.30341151 123.64112,8.94639915 121.226425,8.94639915 C117.667909,8.94639915 114.649571,10.300946 112.171319,13.0100804 C109.693067,15.7192149 108.45396,18.9848279 108.45396,22.8070175 C108.45396,26.8392176 109.714249,30.1783332 112.234864,32.8244645 C114.755479,35.4705958 117.98563,36.7936416 121.925415,36.7936416 C125.568657,36.7936416 128.639949,35.911611 131.139383,34.1475235 L131.139383,27.8472424 L121.289969,27.8472424 L121.289969,19.4678686 L140.607528,19.4678686 L140.607528,38.6207231 C135.057939,43.2829544 128.724723,45.6140351 121.607692,45.6140351 Z M168.567153,45.5510323 C162.509204,45.5510323 157.785752,43.8814745 154.396707,40.5423088 C151.007644,37.2031431 149.313139,32.3414748 149.313139,25.9571581 L149.313139,0.756033731 L159.099007,0.756033731 L159.099007,25.7051468 C159.099007,29.2333219 159.93567,31.9319153 161.609019,33.801008 C163.282369,35.6701008 165.644086,36.6046331 168.694242,36.6046331 C171.744398,36.6046331 174.106116,35.7016019 175.779465,33.8955123 C177.452815,32.0894227 178.289477,29.4643318 178.289477,26.0201609 L178.289477,0.756033731 L188.075346,0.756033731 L188.075346,25.642144 C188.075346,32.1944691 186.349068,37.1506407 182.896461,40.5108074 C179.443853,43.8709741 174.667465,45.5510323 168.567153,45.5510323 Z M190.727544,44.8580014 L209.790925,0.441019676 L218.814258,0.441019676 L237.877638,44.8580014 L227.646958,44.8580014 L223.580103,34.96656 L204.770901,34.96656 L200.704046,44.8580014 L190.727544,44.8580014 Z M208.265854,26.3981778 L220.08515,26.3981778 L214.175502,12.0965397 L208.265854,26.3981778 Z M242.984641,44.8580014 L242.984641,0.756033731 L263.318914,0.756033731 C268.95323,0.756033731 273.27422,2.24708534 276.282013,5.2292333 C278.823809,7.74935834 280.094689,11.1514761 280.094689,15.4356887 C280.094689,22.1980242 276.91749,26.7551819 270.562998,29.1072986 L281.429125,44.8580014 L269.991097,44.8580014 L260.332318,30.7453717 L252.77051,30.7453717 L252.77051,44.8580014 L242.984641,44.8580014 Z M252.77051,22.1769894 L262.683468,22.1769894 C265.055811,22.1769894 266.898587,21.5994694 268.211848,20.4444121 C269.52511,19.2893548 270.181731,17.7458014 270.181731,15.8137055 C270.181731,13.7556034 269.503929,12.1910493 268.148304,11.1199961 C266.792679,10.048943 264.907541,9.51342445 262.492834,9.51342445 L252.77051,9.51342445 L252.77051,22.1769894 Z M287.171574,44.8580014 L287.171574,0.756033731 L304.519251,0.756033731 C311.466828,0.756033731 317.143423,2.84560606 321.549204,7.02481341 C325.954985,11.2040208 328.157842,16.4647029 328.157842,22.8070175 C328.157842,29.1073301 325.944394,34.3575329 321.517431,38.5577203 C317.090469,42.7579077 311.424465,44.8580014 304.519251,44.8580014 L287.171574,44.8580014 Z M296.957443,36.1006106 L304.519251,36.1006106 C308.543762,36.1006106 311.784517,34.8720681 314.241575,32.4149462 C316.698645,29.9578243 317.927161,26.7552134 317.927161,22.8070175 C317.927161,18.9008237 316.688054,15.7087132 314.209802,13.2305903 C311.73155,10.7524673 308.501399,9.51342445 304.519251,9.51342445 L296.957443,9.51342445 L296.957443,36.1006106 Z"
+                      id="ADGUARDVPN" fill-rule="nonzero"></path>
+                  </g>
+                  <g id="small/Logo">
+                    <g id="Group-4">
+                      <g id="Group">
+                        <path
+                          d="M49.9988939,0 C34.3707758,0 15.5193582,3.58555964 1.5333108e-05,11.4776302 C1.5333108e-05,28.5223698 -0.214205321,70.9859756 49.9988939,100 C100.213103,70.9859756 99.9999924,28.5223698 99.9999924,11.4776302 C84.4795396,3.58555964 65.628122,0 49.9988939,0 L49.9988939,0 Z"
+                          id="Path" fill="#68BC71"></path>
+                        <path
+                          d="M50,5.9772276e-09 L50,99.9993609 C-0.214205321,70.9859756 1.53331082e-05,28.5223698 1.53331082e-05,11.4776302 C15.5193582,3.58555964 34.3707758,0 49.9988939,0 Z"
+                          id="Combined-Shape" fill="#67B279"></path>
+                      </g>
+                      <path
+                        d="M49.5588954,64.2857143 L78.5714286,25.8442317 C76.4454491,24.1689936 74.5806614,25.351342 73.554117,26.2667086 L73.5166593,26.2696424 L49.32605,51.0089877 L40.2116724,40.2260482 C35.8635382,35.2873719 29.9523029,39.0544573 28.5714286,40.0500162 L49.5588954,64.2857143"
+                        id="Fill-11" fill="#FFFFFF"></path>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </a>
+          <a href="https://adfilteringdevsummit.com/"
+            class="mr-5 mb-5 lg:mb-0 hover:text-gray-800 dark:hover:text-gray-400">
+            <svg class="h-10" viewBox="51.487 50.111 173.965 55.212" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <style>
+                  .cls-1 {
+                    fill: #fff;
+                  }
+
+                  .cls-2 {
+                    fill: #ff003e;
+                  }
+                </style>
+              </defs>
+              <path class="cls-2"
+                d="M 154.757 53.114 L 147.096 53.114 L 147.096 100.398 C 147.096 100.398 150.525 100.485 154.757 100.485 C 167.838 100.485 178.444 89.879 178.444 76.798 C 178.444 63.717 167.838 53.111 154.757 53.111 L 154.757 53.114 Z M 154.757 86.474 L 149.738 86.474 L 149.738 67.127 L 154.757 67.127 C 160.101 67.127 164.43 71.459 164.43 76.801 C 164.43 82.142 160.098 86.474 154.757 86.474 Z"
+                style="" />
+              <path
+                d="M 139.652 93.456 C 139.652 97.323 142.788 100.456 146.653 100.456 C 150.517 100.456 153.653 97.32 153.653 93.456 L 153.653 60.093 C 153.653 56.226 150.517 53.093 146.653 53.093 C 142.788 53.093 139.652 56.228 139.652 60.093 L 139.652 93.458 L 139.652 93.456 Z"
+                style="" />
+              <path class="cls-2"
+                d="M 112.74 60.093 C 112.74 56.226 109.605 53.093 105.74 53.093 C 101.876 53.093 98.74 56.228 98.74 60.093 L 98.74 93.458 C 98.74 97.326 101.876 100.459 105.74 100.459 C 109.605 100.459 112.74 97.323 112.74 93.458 L 112.74 60.093 Z"
+                style="" />
+              <path class="cls-2"
+                d="M 58.636 100.107 C 62.318 101.33 66.294 99.328 67.498 95.638 L 78.508 61.947 C 79.705 58.286 77.718 54.345 74.063 53.13 C 70.38 51.907 66.405 53.909 65.2 57.599 L 54.19 91.29 C 52.993 94.951 54.98 98.892 58.636 100.107 L 58.636 100.107 Z"
+                style="" />
+              <path
+                d="M 123.832 67.093 C 127.699 67.093 130.832 63.957 130.832 60.093 C 130.832 56.228 127.697 53.093 123.832 53.093 L 105.74 53.093 C 101.873 53.093 98.74 56.228 98.74 60.093 C 98.74 63.957 101.876 67.093 105.74 67.093 L 123.832 67.093 Z"
+                style="" />
+              <path
+                d="M 123.832 83.774 C 127.699 83.774 130.832 80.639 130.832 76.774 C 130.832 72.91 127.697 69.774 123.832 69.774 L 105.74 69.774 C 101.873 69.774 98.74 72.91 98.74 76.774 C 98.74 80.639 101.876 83.774 105.74 83.774 L 123.832 83.774 Z"
+                style="" />
+              <path
+                d="M 85.083 100.107 C 81.401 101.33 77.425 99.328 76.221 95.638 L 65.211 61.947 C 64.014 58.286 66.001 54.345 69.656 53.13 C 73.339 51.907 77.314 53.909 78.519 57.599 L 89.529 91.29 C 90.726 94.951 88.739 98.892 85.083 100.107 L 85.083 100.107 Z"
+                style="" />
+              <circle class="cls-1" cx="71.862" cy="59.765" r="4.514" style="" />
+              <circle class="cls-1" cx="123.867" cy="60.088" r="4.514" style="" />
+              <circle class="cls-1" cx="105.706" cy="76.78" r="4.514" style="" />
+              <circle class="cls-1" cx="146.676" cy="60.061" r="4.514" style="" />
+              <g style="" transform="matrix(0.264156, 0, 0, 0.264156, 39.619236, 38.830933)">
+                <path class="cls-2"
+                  d="M620.86,116.35l-18.25,.03c-2.79,0-5.06-2.27-5.06-5.06s2.27-5.06,5.06-5.06h16.99V53.16h-16.99c-32.07,0-58.16,26.09-58.16,58.16s26.09,58.16,58.16,58.16v-26.55l.04,26.55,18.25-.03c2.79,0,5.06,2.27,5.06,5.06s-2.27,5.06-5.06,5.06h-21v53.1h21c32.07,0,58.16-26.09,58.16-58.16s-26.09-58.16-58.2-58.16Z" />
+                <circle class="cls-1" cx="571.61" cy="206.22" r="17.09" />
+                <path
+                  d="M618.76,53.17c-14.64,0-26.5,11.87-26.5,26.5s11.87,26.5,26.5,26.5h33.72c14.64,0,26.5-11.87,26.5-26.5s-11.87-26.5-26.5-26.5h-33.72Z" />
+                <circle class="cls-1" cx="652.61" cy="79.65" r="17.09" />
+                <path
+                  d="M604.62,232.62c14.64,0,26.5-11.87,26.5-26.5s-11.87-26.5-26.5-26.5h-33.72c-14.64,0-26.5,11.87-26.5,26.5s11.87,26.5,26.5,26.5h33.72Z" />
+                <circle class="cls-1" cx="570.77" cy="206.13" r="17.09" />
+              </g>
+            </svg>
+          </a>
+        </div>
+      </div>
     </div>
-    <div>
-      <div class="text-xl font-medium text-black">Wow, it works!</div>
-      <p class="text-slate-500">
-        This alert is build with Tailwind CSS classes
+  </section>
+
+  <section class="bg-white dark:bg-gray-900">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+      <h2 class="text-4xl font-extrabold dark:text-white">Timeline</h2>
+      <p class="my-4 text-lg font-normal text-gray-500 dark:text-gray-400">
+        Large Language Models have not been actively used by adtech companies
+        besides some initial experiments. However, everyone sees the potential
+        and we believe they are soon arise.
+      </p>
+
+      <ol class="relative border-s border-gray-200 dark:border-gray-700">
+        <li class="mb-10 ms-4">
+          <div
+            class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
+          </div>
+          <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+            2021
+          </time>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            SmarterChild: pioneering AI chatbot
+          </h3>
+          <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+            Early chatbot SmarterChild gains popularity among preteens for its
+            witty responses on AIM and MSN. It is a precursor to modern AI bots
+            like Siri and Alexa, even inspiring investors to fund Siri.
+          </p>
+        </li>
+        <li class="mb-10 ms-4">
+          <div
+            class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
+          </div>
+          <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+            December 2015
+          </time>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            Creation of OpenAI
+          </h3>
+          <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+            OpenAI is introduced as a non-profit organization focused on
+            advancing digital intelligence in a way that benefits humanity as a
+            whole.
+          </p>
+        </li>
+        <li class="mb-10 ms-4">
+          <div
+            class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
+          </div>
+          <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+            June 2018
+          </time>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            GPT-1 launch
+          </h3>
+          <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+            OpenAI unveils GPT-1, its initial version of GPT.
+          </p>
+        </li>
+        <li class="mb-10 ms-4">
+          <div
+            class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
+          </div>
+          <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+            February 2019
+          </time>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            Launch of GPT-2
+          </h3>
+          <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+            The second version of GPT (Generative Pre-trained Transformer),
+            known as GPT-2, makes its debut.
+          </p>
+        </li>
+        <li class="mb-10 ms-4">
+          <div
+            class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
+          </div>
+          <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+            July 2019
+          </time>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            Partnership between Microsoft and OpenAI
+          </h3>
+          <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+            The partnership between Microsoft and OpenAI is disclosed, marking
+            the commencement of their collaborative efforts in advancing AI
+            technology.
+          </p>
+        </li>
+        <li class="mb-10 ms-4">
+          <div
+            class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
+          </div>
+          <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+            June 2020
+          </time>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            GPT-3 launch
+          </h3>
+          <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+            OpenAI introduces GPT-3, which has over a thousand times the number
+            of parameters compared to its initial predecessor.
+          </p>
+        </li>
+        <li class="mb-10 ms-4">
+          <div
+            class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
+          </div>
+          <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+            November 2022
+          </time>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            OpenAI launches GPT-3.5 featuring ChatGPT
+          </h3>
+          <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+            OpenAI introduces GPT-3, which has over a thousand times the number
+            of parameters compared to its initial predecessor.
+          </p>
+        </li>
+      </ol>
+
+      <p class="my-4 text-sm font-normal italic text-gray-500 dark:text-gray-400">
+        Source for timeline:
+        <a class="text-blue-400" href="https://timelines.issarice.com/wiki/Timeline_of_ChatGPT">
+          timelines.issarice.com
+        </a>
       </p>
     </div>
-  </div>
+  </section>
+
+  <footer class="p-4 bg-white md:p-8 lg:p-10 dark:bg-gray-800">
+    <div class="mx-auto max-w-screen-xl text-center">
+      <ul class="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
+        <li>
+          <a href="https://github.com/ameshkov/llm-ads-demo" class="mr-4 hover:underline md:mr-6 ">Github Repo</a>
+        </li>
+        <li>
+          <a href="https://adguard.com/" class="mr-4 hover:underline md:mr-6">AdGuard</a>
+        </li>
+        <li>
+          <a href="https://adfilteringdevsummit.com/" class="mr-4 hover:underline md:mr-6 ">Ad Filtering Dev Summit</a>
+        </li>
+      </ul>
+      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="#"
+          class="hover:underline">AdGuard</a>. All Rights Reserved.</span>
+    </div>
+  </footer>
+
   <script type="module" src="assets/main.js"></script>
 </body>
 
