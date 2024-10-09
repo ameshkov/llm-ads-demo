@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import { defineConfig } from 'vite';
+import solidPlugin from 'vite-plugin-solid';
 import CloudflarePagesFunctions from 'vite-plugin-cloudflare-functions';
 
 export default defineConfig({
@@ -15,6 +16,9 @@ export default defineConfig({
         },
     },
     plugins: [
+        solidPlugin({
+            hot: false,
+        }),
         CloudflarePagesFunctions({
             root: 'functions',
             outDir: '../dist',

@@ -64,89 +64,39 @@
         </nav>
     </header>
 
-    <section class="bg-white dark:bg-gray-900">
-        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-            <h2 class="text-4xl font-extrabold dark:text-white">Demo</h2>
-            <p class="my-4 text-lg font-normal text-gray-500 dark:text-gray-400">
-                This is a demo page to showcase how ads can be displayed.
-            </p>
+    <noscript>
+        <section class="bg-white dark:bg-gray-900">
+            <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+                <h2
+                    class="mb-4 text-2xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-4xl dark:text-white">
+                    Javascript must be enabled to see the page content
+                </h2>
+            </div>
+        </section>
+    </noscript>
 
-            <ol class="relative border-s border-gray-200 dark:border-gray-700">
-                <li class="mb-10 ms-4">
-                    <div
-                        class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
-                    </div>
-                    <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                        Prompt
-                    </time>
+    <div id="app"></div>
 
-                    <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                        We're showcasing LLM ads so we should start with a
-                        prompt.
-                    </p>
-
-                    <form class="max-w-sm">
-                        <div class="mb-5">
-                            <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Ask the Chatbot something
-                            </label>
-                            <textarea id="message" rows="4"
-                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Enter your question">What is a large language model?</textarea>
-                        </div>
-
-                        <button type="submit"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Submit
-                        </button>
-                    </form>
+    <footer class="p-4 bg-white md:p-8 lg:p-10 dark:bg-gray-800">
+        <div class="mx-auto max-w-screen-xl text-center">
+            <ul class="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
+                <li>
+                    <a href="https://github.com/ameshkov/llm-ads-demo" class="mr-4 hover:underline md:mr-6 ">Github
+                        Repo</a>
                 </li>
-
-                <li class="mb-10 ms-4">
-                    <div
-                        class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
-                    </div>
-                    <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                        Baseline response
-                    </time>
-
-                    <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                        The first step is to generate a baseline response that
-                        does not include any ads.
-                    </p>
-
-                    <div
-                        class="px-3 py-1 w-64 text-xs text-center font-medium leading-none text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">
-                        Preparing the response...
-                    </div>
-
-                    <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900">
-                        <footer class="flex justify-between items-center mb-2">
-                            <div class="flex items-center">
-                                <p
-                                    class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
-                                    <img class="mr-2 w-6 h-6 rounded-full"
-                                        src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-                                        alt="Michael Gough" />
-                                    Chat bot
-                                </p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">
-                                    <time pubdate datetime="2022-02-08" title="February 8th, 2022">Feb. 8, 2022</time>
-                                </p>
-                            </div>
-                        </footer>
-                        <p class="text-gray-500 dark:text-gray-400">
-                            Very straight-to-point article. Really worth time
-                            reading. Thank you! But tools are just the
-                            instruments for the UX designers. The knowledge of the design tools are as important as the
-                            creation of the design strategy.
-                        </p>
-                    </article>
-
+                <li>
+                    <a href="https://adguard.com/" class="mr-4 hover:underline md:mr-6">AdGuard</a>
                 </li>
-            </ol>
+                <li>
+                    <a href="https://adfilteringdevsummit.com/" class="mr-4 hover:underline md:mr-6 ">Ad Filtering Dev
+                        Summit</a>
+                </li>
+            </ul>
+            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="#"
+                    class="hover:underline">AdGuard</a>. All Rights Reserved.</span>
         </div>
-    </section>
+    </footer>
 
     <script type="module" src="assets/main.js"></script>
+    <script type="module" src="assets/demoads.js"></script>
 </body>
