@@ -26,6 +26,8 @@ function Prompt(props) {
 
             props.setStore('baselineResponse', json.text);
         } catch (ex) {
+
+            // TODO: Handle better, reset state, show alert
             props.setStore('baselineResponse', 'Something went wrong, please try again.');
         }
     }
@@ -74,6 +76,7 @@ function BaselineResponse(props) {
 
         props.setStore('loadingAdvertisers', true);
 
+        // TODO: Handle errors
         const response = await fetch('/api/find-advertisers', {
             method: 'POST',
             headers: {
@@ -340,6 +343,7 @@ function Auction(props) {
 
         const advert = advertisers[0].originalAdvertiser;
 
+        // TODO: Handle errors
         const response = await fetch('/api/modify-response', {
             method: 'POST',
             headers: {
@@ -438,7 +442,7 @@ function Diff(props) {
                         <img class="mr-2 w-6 h-6 rounded-full"
                             src={chatGptSvg}
                             alt="ChatBot" />
-                        ChatBot vs AdBot
+                        AdBot vs ChatBot
                     </p>
                     <p class="text-sm text-gray-600 dark:text-gray-400">
                         <time pubdate
