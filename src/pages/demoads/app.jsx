@@ -3,6 +3,7 @@ import { createSignal, onMount } from "solid-js";
 import { createStore } from "solid-js/store";
 import { SolidMarkdown } from "solid-markdown";
 import { diffChars } from 'diff';
+import chatGptSvg from '../../assets/chatgpt.svg';
 
 function Prompt(props) {
     const submit = async (e) => {
@@ -137,7 +138,7 @@ function Comment(props) {
                     <p
                         class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
                         <img class="mr-2 w-6 h-6 rounded-full"
-                            src="assets/chatgpt.svg"
+                            src={chatGptSvg}
                             alt={props.author} />
                         {props.author}
                     </p>
@@ -435,7 +436,7 @@ function Diff(props) {
                     <p
                         class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
                         <img class="mr-2 w-6 h-6 rounded-full"
-                            src="assets/chatgpt.svg"
+                            src={chatGptSvg}
                             alt="ChatBot" />
                         ChatBot vs AdBot
                     </p>
