@@ -1,5 +1,9 @@
 import 'flowbite';
 
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.classList.add('dark');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const updateButtonImg = () => {
         const svgEnableDark = document.getElementById('svg-enable-dark-mode');

@@ -7,6 +7,19 @@
   }
 
   html.dark {
+    .ag-logo-dark {
+      display: none;
+    }
+  }
+
+  html:not(.dark) {
+    .ag-logo-white {
+      display: none;
+    }
+  }
+
+
+  html.dark {
     @apply text-neutral-50;
     @apply bg-neutral-800;
   }

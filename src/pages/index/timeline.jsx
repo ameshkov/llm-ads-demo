@@ -128,4 +128,7 @@ function TimelineItem(props) {
     )
 }
 
-render(() => <Timeline />, document.getElementById('timeline'));
+document.addEventListener('DOMContentLoaded', () => {
+    render(() => <Timeline />, document.getElementById('timeline'));
+});
+
