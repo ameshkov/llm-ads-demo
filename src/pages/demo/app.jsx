@@ -892,9 +892,10 @@ function App() {
     return (
         <section class="bg-white dark:bg-gray-900">
             <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-                <h2 class="text-4xl font-extrabold dark:text-white">Demo: Ads Framework</h2>
+                <h2 class="text-4xl font-extrabold dark:text-white">Ads (Blocking) Framework</h2>
                 <p class="my-4 text-lg font-normal text-gray-500 dark:text-gray-400">
-                    This is a demo page to showcase how ads can be displayed.
+                    This is a demo page to showcase how LLM ads can be
+                    displayed and blocked.
                     It uses the approach outlined the paper&nbsp;
                     <a href="https://arxiv.org/abs/2311.07601"
                         class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">
