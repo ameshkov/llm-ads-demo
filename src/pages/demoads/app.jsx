@@ -5,6 +5,18 @@ import { SolidMarkdown } from "solid-markdown";
 import { diffChars } from 'diff';
 import chatGptSvg from '../../assets/chatgpt.svg';
 
+function scrollIntoView(elementRef) {
+    if (elementRef) {
+        // Make a short pause before scrolling the element into view.
+        setTimeout(() => {
+            elementRef.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+        }, 100);
+    }
+}
+
 function Prompt(props) {
     const submit = async (e) => {
         e.preventDefault();
@@ -146,7 +158,7 @@ function BaselineResponse(props) {
 
 function Comment(props) {
     return (
-        <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900">
+        <article ref={el => scrollIntoView(el)} class="p-6 text-base bg-white rounded-lg dark:bg-gray-900">
             <footer class="flex justify-between items-center mb-2">
                 <div class="flex items-center">
                     <p
@@ -166,7 +178,9 @@ function Comment(props) {
                 </div>
             </footer>
             <div class="text-gray-500 dark:text-gray-400">
-                <SolidMarkdown children={props.text} />
+                <Show when={props.text}>
+                    <SolidMarkdown children={props.text} />
+                </Show>
             </div>
         </article>
     )
@@ -196,7 +210,7 @@ function Advertisers(props) {
     }
 
     return (
-        <li class="mb-10 ms-4">
+        <li class="mb-10 ms-4" ref={el => scrollIntoView(el)}>
             <div
                 class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
             </div>
@@ -269,7 +283,7 @@ function Predict(props) {
     }).sort((a, b) => (b.score) - (a.score));
 
     return (
-        <li class="mb-10 ms-4">
+        <li class="mb-10 ms-4" ref={el => scrollIntoView(el)}>
             <div
                 class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
             </div>
@@ -388,7 +402,7 @@ function Auction(props) {
     }
 
     return (
-        <li class="mb-10 ms-4">
+        <li class="mb-10 ms-4" ref={el => scrollIntoView(el)}>
             <div
                 class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
             </div>
