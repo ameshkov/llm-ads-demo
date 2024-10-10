@@ -2,7 +2,7 @@ import { render } from 'solid-js/web';
 import { createSignal, onMount } from "solid-js";
 import { createStore } from "solid-js/store";
 import { SolidMarkdown } from "solid-markdown";
-import { diffChars } from 'diff';
+import { diffWords } from 'diff';
 import chatGptSvg from '../../assets/img/chatgpt.svg';
 
 function scrollIntoView(elementRef) {
@@ -540,7 +540,7 @@ function Diff(props) {
     let divRef;
 
     onMount(() => {
-        const diff = diffChars(props.before, props.after);
+        const diff = diffWords(props.before, props.after);
         const fragment = document.createDocumentFragment();
 
         diff.forEach((part) => {
