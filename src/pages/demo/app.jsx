@@ -546,9 +546,9 @@ function Diff(props) {
         diff.forEach((part) => {
             let colorClass;
             if (part.added) {
-                colorClass = 'text-red-600 dark:text-red-400';
+                colorClass = 'text-red-400 dark:text-red-300 line-through';
             } else if (part.removed) {
-                colorClass = 'text-green-600 dark:text-green-400';
+                colorClass = 'text-green-400 dark:text-green-300';
             }
 
             const textNode = document.createTextNode(part.value);
