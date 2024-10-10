@@ -544,12 +544,18 @@ function Diff(props) {
         const fragment = document.createDocumentFragment();
 
         diff.forEach((part) => {
-            const color = part.added ? 'green' : part.removed ? 'red' : null;
+            let colorClass;
+            if (part.added) {
+                colorClass = 'text-red-600 dark:text-red-400';
+            } else if (part.removed) {
+                colorClass = 'text-green-600 dark:text-green-400';
+            }
+
             const textNode = document.createTextNode(part.value);
 
-            if (color) {
+            if (colorClass) {
                 const span = document.createElement('span');
-                span.style.color = color;
+                span.setAttribute('class', colorClass);
                 span.appendChild(textNode);
                 fragment.appendChild(span);
             } else {
@@ -755,7 +761,7 @@ function IdentifiedAds(props) {
             const regex = new RegExp(`(${escapedSubstrings.join('|')})`, 'gi');
 
             // Replace the matched substrings with a <span> tag to highlight them
-            return str.replace(regex, '<span style="color: red;">$1</span>');
+            return str.replace(regex, '<span class="text-pink-600 dark:text-pink-400">$1</span>');
         }
 
         const originalText = props.store.adResponse;
