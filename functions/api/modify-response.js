@@ -30,9 +30,8 @@ export async function onRequestPost(context) {
 }
 
 function createPrompt(prompt, baselineResponse, productName, productDescription) {
-    return `
-Please modify the ORIGINAL ANSWER to the QUESTION so that it includes
-advertising of the ADVERISER.
+    return `Please modify the ORIGINAL ANSWER to the QUESTION so that it
+includes advertising of the ADVERISER.
 
 Make sure to connect the answer and the advertisement very naturally,
 not something like appending the ads after just answering the question.

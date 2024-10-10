@@ -17,6 +17,21 @@ function scrollIntoView(elementRef) {
     }
 }
 
+function replaceNewlinesWithBr(div) {
+    // Iterate over all child nodes of the div
+    div.childNodes.forEach(node => {
+        // Only process text nodes (nodeType 3)
+        if (node.nodeType === Node.TEXT_NODE) {
+            // Replace double newlines (\n\n) with <br/>
+            const updatedText = node.nodeValue.replace(/\n{2}/g, '<br/>');
+            // Replace the text node with a new HTML node
+            const newHTML = document.createElement('span');
+            newHTML.innerHTML = updatedText;
+            div.replaceChild(newHTML, node);
+        }
+    });
+}
+
 function Prompt(props) {
     const [loading, setLoading] = createSignal(false);
     const [error, setError] = createSignal(false);
@@ -85,7 +100,7 @@ function Prompt(props) {
 
                     <Show when={loading()}>
                         <div
-                            class="px-3 py-1 w-36 text-xs text-center font-medium leading-none text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">
+                            class="px-3 py-1 w-40 text-xs text-center font-medium leading-none text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">
                             Thinking...
                         </div>
                     </Show>
@@ -172,8 +187,7 @@ function BaselineResponse(props) {
 
             <Show when={!props.store.advertisers}>
                 <Show when={!loading()}>
-                    <button type="submit"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         onClick={findAdvertisers}>
                         Find advertisers
                     </button>
@@ -181,7 +195,7 @@ function BaselineResponse(props) {
 
                 <Show when={loading()}>
                     <div
-                        class="px-3 py-1 w-36 text-xs text-center font-medium leading-none text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">
+                        class="px-3 py-1 w-40 text-xs text-center font-medium leading-none text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">
                         Looking for them...
                     </div>
                 </Show>
@@ -499,8 +513,7 @@ function Auction(props) {
 
             <Show when={!props.store.adResponse}>
                 <Show when={!loading()}>
-                    <button type="submit"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         onClick={loadAdResponse}>
                         Show response with ad
                     </button>
@@ -508,7 +521,7 @@ function Auction(props) {
 
                 <Show when={loading()}>
                     <div
-                        class="px-3 py-1 w-36 text-xs text-center font-medium leading-none text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">
+                        class="px-3 py-1 w-40 text-xs text-center font-medium leading-none text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">
                         Waiting for AdBot...
                     </div>
                 </Show>
@@ -545,8 +558,7 @@ function Diff(props) {
         });
 
         divRef.appendChild(fragment);
-
-        scrollIntoView(divRef);
+        replaceNewlinesWithBr(divRef);
     });
 
     return (
@@ -558,7 +570,7 @@ function Diff(props) {
                         <img class="mr-2 w-6 h-6 rounded-full"
                             src={chatGptSvg}
                             alt="ChatBot" />
-                        AdBot vs ChatBot
+                        {props.author}
                     </p>
                     <p class="text-sm text-gray-600 dark:text-gray-400">
                         <time pubdate
@@ -576,12 +588,10 @@ function Diff(props) {
 }
 
 function AdResponse(props) {
-    const [showDiff, setShowDiff] = createSignal(false);
-
-    const tryAgain = (e) => {
+    const showDiff = (e) => {
         e.preventDefault();
 
-        window.location.reload();
+        props.setStore('adResponseDiff', true);
     }
 
     return (
@@ -599,25 +609,269 @@ function AdResponse(props) {
 
             <Comment text={props.store.adResponse} author="AdBot" />
 
-            <Show when={!showDiff()}>
+            <Show when={!props.store.adResponseDiff}>
                 <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    onClick={() => setShowDiff(true)}>
+                    onClick={showDiff}>
                     See what changed
                 </button>
             </Show>
+        </li>
+    )
+}
 
-            <Show when={showDiff()}>
-                <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                    Here's what changed in the response.
-                </p>
+function AdResponseDiff(props) {
+    const [loading, setLoading] = createSignal(false);
+    const [error, setError] = createSignal(false);
 
-                <Diff before={props.store.baselineResponse} after={props.store.adResponse} />
+    const identifyAds = async (e) => {
+        e.preventDefault();
 
-                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    onClick={tryAgain}>
-                    Try again
-                </button>
+        setLoading(true);
+        setError(false);
+
+        try {
+            const response = await fetch('/api/identify-ads', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    prompt: props.store.prompt,
+                    response: props.store.adResponse,
+                }),
+            });
+
+            const json = await response.json();
+            if (!json.adverts) {
+                throw new Error('Got empty adverts list');
+            }
+
+            props.setStore('adParts', json.adverts);
+        } catch (ex) {
+            setError(true);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    return (
+        <li class="mb-10 ms-4" ref={el => scrollIntoView(el)}>
+            <div
+                class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
+            </div>
+            <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                What changed
+            </time>
+
+            <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                Here's what changed in the response with ads.
+            </p>
+
+            <Diff before={props.store.baselineResponse}
+                after={props.store.adResponse}
+                author="AdBot vs ChatBot" />
+
+            <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                Huh, what can ad blockers do with that? Traditional
+                ad&nbsp;blocking is indeed helpless and its only chance is
+                also to use LLMs. First of all, let's see if we can identify
+                ads in the modified response.
+            </p>
+
+            <Show when={!props.store.adParts}>
+                <Show when={!loading()}>
+                    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        onClick={identifyAds}>
+                        Identify ads
+                    </button>
+                </Show>
+
+                <Show when={loading()}>
+                    <div
+                        class="px-3 py-1 w-40 text-xs text-center font-medium leading-none text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">
+                        Waiting for AdGuardBot...
+                    </div>
+                </Show>
+
+                <Show when={error()}>
+                    <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                        <span class="font-medium">Oh, snapp!</span> Please try again later.
+                    </p>
+                </Show>
             </Show>
+        </li>
+    )
+}
+
+function IdentifiedAds(props) {
+    const [loading, setLoading] = createSignal(false);
+    const [error, setError] = createSignal(false);
+
+    const blockAds = async (e) => {
+        e.preventDefault();
+
+        setLoading(true);
+        setError(false);
+
+        try {
+            const response = await fetch('/api/block-ads', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    prompt: props.store.prompt,
+                    response: props.store.adResponse,
+                }),
+            });
+
+            const json = await response.json();
+            if (!json || !json.text) {
+                throw new Error('Empty response text');
+            }
+
+            props.setStore('adGuardResponse', json.text);
+        } catch (ex) {
+            setError(true);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    let divRef;
+
+    onMount(() => {
+        // Function to highlight substrings
+        function highlightSubstrings(str, substrings) {
+            // Sort substrings by length in descending order to avoid overlapping issues
+            substrings.sort((a, b) => b.length - a.length);
+
+            // Escape special characters in substrings to prevent issues with regex
+            const escapedSubstrings = substrings.map(substring =>
+                substring.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+            );
+
+            // Create a regex pattern from the substrings
+            const regex = new RegExp(`(${escapedSubstrings.join('|')})`, 'gi');
+
+            // Replace the matched substrings with a <span> tag to highlight them
+            return str.replace(regex, '<span style="color: red;">$1</span>');
+        }
+
+        const originalText = props.store.adResponse;
+        const highlightedText = props.store.adParts.length === 0 ?
+            originalText : highlightSubstrings(originalText, props.store.adParts);
+
+        divRef.innerHTML = highlightedText;
+        replaceNewlinesWithBr(divRef);
+    });
+
+    return (
+        <li class="mb-10 ms-4" ref={el => scrollIntoView(el)}>
+            <div
+                class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
+            </div>
+            <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                Attempt to identify ads
+            </time>
+
+            <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                Here is the ad response with where the highlighted advertising
+                parts.
+            </p>
+
+            <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900">
+                <footer class="flex justify-between items-center mb-2">
+                    <div class="flex items-center">
+                        <p
+                            class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
+                            <img class="mr-2 w-6 h-6 rounded-full"
+                                src={chatGptSvg}
+                                alt="ChatBot" />
+                            AdGuardBot
+                        </p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                            <time pubdate
+                                datetime={new Date().toLocaleDateString()}
+                                title={new Date().toLocaleDateString()}>
+                                {new Date().toLocaleDateString()}
+                            </time>
+                        </p>
+                    </div>
+                </footer>
+                <div class="text-gray-500 dark:text-gray-400" ref={divRef}>
+                </div>
+            </article>
+
+            <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                What's next? Now let's try removing the ads!
+            </p>
+
+            <Show when={!props.store.adGuardResponse}>
+                <Show when={!loading()}>
+                    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        onClick={blockAds}>
+                        Block ads!
+                    </button>
+                </Show>
+
+                <Show when={loading()}>
+                    <div
+                        class="px-3 py-1 w-40 text-xs text-center font-medium leading-none text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">
+                        Waiting for AdGuardBot...
+                    </div>
+                </Show>
+
+                <Show when={error()}>
+                    <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                        <span class="font-medium">Oh, snapp!</span> Please try again later.
+                    </p>
+                </Show>
+            </Show>
+        </li>
+    )
+}
+
+function BlockAds(props) {
+    return (
+        <li class="mb-10 ms-4" ref={el => scrollIntoView(el)}>
+            <div
+                class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
+            </div>
+            <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                Attempt to block ads
+            </time>
+
+            <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                Here is how the response looks like after the ads were removed.
+            </p>
+
+            <Comment text={props.store.adGuardResponse} author="AdGuardBot" />
+
+            <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                Here's what changed compared to the ad response.
+            </p>
+
+            <Diff before={props.store.adResponse}
+                after={props.store.adGuardResponse}
+                author="AdGuardBot vs AdBot" />
+
+            <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                And here's what changed compared to the baseline response.
+            </p>
+
+            <Diff before={props.store.baselineResponse}
+                after={props.store.adGuardResponse}
+                author="AdGuardBot vs ChatBot" />
+
+            <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                Want to try again?
+            </p>
+
+            <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                onClick={() => { window.location.reload(); }}>
+                Try again
+            </button>
         </li>
     )
 }
@@ -630,6 +884,9 @@ function App() {
         predict: false,
         auction: false,
         adResponse: null,
+        adResponseDiff: null,
+        adParts: null,
+        adGuardResponse: null,
     });
 
     return (
@@ -684,6 +941,27 @@ function App() {
 
                     <Show when={store.adResponse}>
                         <AdResponse
+                            store={store}
+                            setStore={setStore}
+                        />
+                    </Show>
+
+                    <Show when={store.adResponseDiff}>
+                        <AdResponseDiff
+                            store={store}
+                            setStore={setStore}
+                        />
+                    </Show>
+
+                    <Show when={store.adParts}>
+                        <IdentifiedAds
+                            store={store}
+                            setStore={setStore}
+                        />
+                    </Show>
+
+                    <Show when={store.adGuardResponse}>
+                        <BlockAds
                             store={store}
                             setStore={setStore}
                         />

@@ -10,8 +10,7 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 index: 'src/index.html',
-                demoads: 'src/demoads.html',
-                demoadblocking: 'src/demoadblocking.html',
+                demoads: 'src/demo.html',
             },
         },
     },

@@ -26,8 +26,7 @@ export async function onRequestPost(context) {
 }
 
 function createPrompt(prompt, baselineResponse) {
-    return `
-Imagine the following situation: a ChatGPT user asks a QUESTION, and in
+    return `Imagine the following situation: a ChatGPT user asks a QUESTION, and in
 response, an ANSWER is generated. This answer can be modified to include some
 advertising information.
 
