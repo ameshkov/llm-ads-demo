@@ -28,6 +28,8 @@ export default defineConfig({
                 compatibilityDate: '2024-10-08',
                 binding: {
                     API_TOKEN: process.env.API_TOKEN,
+                    // Change to `prod` to use OpenAI instead of stubs.
+                    ENV: 'local',
                 },
             }
         })

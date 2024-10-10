@@ -1,8 +1,10 @@
 import { completion } from '../openai.js';
+import { localData } from '../local-data.js';
 
 export async function onRequestPost(context) {
-    // TODO: Temp, remove
-    // return Response.json({"advertisers":[{"companyName":"TextGenius Co.","companyCategory":"AI Technology","productName":"GeniusWriter","productDescription":"An AI writing assistant that helps you create high-quality content quickly and easily.","bid":1.5,"predict":75},{"companyName":"LinguaPro","companyCategory":"Language Learning","productName":"LinguaMaster","productDescription":"A comprehensive app for mastering any language through interactive lessons and real-world practice.","bid":1.2,"predict":65},{"companyName":"ChatBot Solutions","companyCategory":"Software Development","productName":"SmartChat Bot","productDescription":"Build custom chatbots for your business using our intelligent chatbot framework.","bid":2,"predict":70},{"companyName":"DataInsights Analytics","companyCategory":"Business Intelligence","productName":"InsightAI","productDescription":"Leverage AI to gain deep insights into your business data for informed decision-making.","bid":2.5,"predict":60}]});
+    if (context.env.ENV === 'local') {
+        return Response.json(localData.advertisers);
+    }
 
     const json = await context.request.json();
 
@@ -43,6 +45,8 @@ For each advertiser, I need the following information:
 * Bid for the user click (in USD)
 * A short description of the product (no more than 30 words)
 * Likelihood of a person clicking on the ad (0-100)
+* Social welfare score, i.e. how satisfactory the response with ads of that
+  product will be for the user (0-100).
 
 Respond with a JSON object with the following schema:
 
@@ -89,6 +93,10 @@ const responseFormat = {
                             "predict": {
                                 "type": "number",
                                 "description": "Likelihood of a person clicking on the ad (0-100).",
+                            },
+                            "welfare": {
+                                "type": "number",
+                                "description": "Social welfare score, i.e. how satisfactory the response with ads of that product will be for the user (0-100)",
                             }
                         },
                         "required": [
@@ -97,7 +105,8 @@ const responseFormat = {
                             "productName",
                             "productDescription",
                             "bid",
-                            "predict"
+                            "predict",
+                            "welfare"
                         ],
                         "additionalProperties": false
                     },

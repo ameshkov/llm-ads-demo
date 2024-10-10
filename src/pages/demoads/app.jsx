@@ -26,7 +26,6 @@ function Prompt(props) {
 
             props.setStore('baselineResponse', json.text);
         } catch (ex) {
-
             // TODO: Handle better, reset state, show alert
             props.setStore('baselineResponse', 'Something went wrong, please try again.');
         }
@@ -44,7 +43,7 @@ function Prompt(props) {
 
             <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
                 We're showcasing LLM ads so we should start with a
-                prompt.
+                prompt. The demo is interactive, so feel free to ask anything.
             </p>
 
             <form class="max-w-sm aria-disabled" onSubmit={submit}>
@@ -106,6 +105,18 @@ function BaselineResponse(props) {
             <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
                 The first step is to generate a baseline response that
                 does not include any ads.
+            </p>
+
+            <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                Alternative approach is to use "Retrieval Augmented Generation",
+                i.e. select the advertisers first and then use a special prompt
+                for generating the response. This way there will be no baseline
+                response to which we could compare the augmented response. More
+                on that in&nbsp;
+                <a href="https://arxiv.org/abs/2406.09459"
+                    class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">
+                    this paper
+                </a> (June 2024).
             </p>
 
             <Show when={props.store.promptSubmitted && !props.store.baselineResponse}>
@@ -205,7 +216,7 @@ function Advertisers(props) {
             </Show>
 
             <Show when={!props.store.loadingAdvertisers && props.store.advertisers}>
-                <div class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
+                <div class="grid gap-8 mb-6 lg:mb-8 md:grid-cols-2">
                     <For each={props.store.advertisers}>{(advertiser, i) =>
                         <AdvertiserCard advertiser={advertiser} key={i} />
                     }</For>
@@ -231,6 +242,12 @@ function PredictRow(props) {
             <td class="px-6 py-4">
                 {props.advertiser.predict}%
             </td>
+            <td class="px-6 py-4">
+                {props.advertiser.welfare}%
+            </td>
+            <td class="px-6 py-4">
+                {props.advertiser.score}
+            </td>
         </tr>
     )
 }
@@ -245,9 +262,11 @@ function Predict(props) {
     const advertisers = props.store.advertisers.map((advertiser) => {
         return {
             productName: `${advertiser.productName} by ${advertiser.companyName}`,
-            predict: advertiser.predict
+            predict: advertiser.predict,
+            welfare: advertiser.welfare,
+            score: advertiser.predict * advertiser.welfare
         }
-    }).sort((a, b) => b.predict - a.predict);
+    }).sort((a, b) => (b.score) - (a.score));
 
     return (
         <li class="mb-10 ms-4">
@@ -272,6 +291,12 @@ function Predict(props) {
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Click prediction
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Social welfare
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Overall score
                             </th>
                         </tr>
                     </thead>
@@ -313,7 +338,7 @@ function AuctionRow(props) {
                 )}
             </th>
             <td class="px-6 py-4">
-                {props.advertiser.predict}%
+                {props.advertiser.predict}
             </td>
             <td class="px-6 py-4">
                 ${props.advertiser.bid}
@@ -329,9 +354,9 @@ function Auction(props) {
     const advertisers = props.store.advertisers.map(advertiser => {
         return {
             productName: `${advertiser.productName} by ${advertiser.companyName}`,
-            predict: advertiser.predict,
+            predict: advertiser.predict * advertiser.welfare,
             bid: advertiser.bid,
-            result: advertiser.bid * advertiser.predict,
+            result: advertiser.bid * advertiser.predict * advertiser.welfare,
             originalAdvertiser: advertiser,
         }
     }).sort((a, b) => b.result - a.result);
@@ -384,13 +409,13 @@ function Auction(props) {
                                 Product name
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Predict
+                                Predict score
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Bid
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Result
+                                Bid × Predict score
                             </th>
                         </tr>
                     </thead>
@@ -472,7 +497,7 @@ function AdResponse(props) {
                 class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
             </div>
             <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                Ad response
+                Modification
             </time>
 
             <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
@@ -532,6 +557,14 @@ function App() {
                 <h2 class="text-4xl font-extrabold dark:text-white">Demo</h2>
                 <p class="my-4 text-lg font-normal text-gray-500 dark:text-gray-400">
                     This is a demo page to showcase how ads can be displayed.
+                    It uses the approach outlined the paper&nbsp;
+                    <a href="https://arxiv.org/abs/2311.07601"
+                        class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">
+                        Online Advertisements with LLMs: Opportunities and Challenges
+                    </a>
+                    &nbsp;that was published in November 2023. This paper introduces
+                    a general framework for LLM advertising: prediction,
+                    bidding, auction and modification modules.
                 </p>
 
                 <ol class="relative border-s border-gray-200 dark:border-gray-700">

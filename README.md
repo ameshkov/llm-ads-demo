@@ -10,6 +10,9 @@ npm install
 npm run dev
 ```
 
+For local development it is recommended to change `ENV` to `local` in
+`vite.config.js` to avoid expensive calls to OpenAI API.
+
 ## How to deploy
 
 The demo project is supposed to be deployed on Cloudflare Pages.
