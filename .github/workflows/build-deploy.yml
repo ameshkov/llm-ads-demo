@@ -43,8 +43,13 @@ jobs:
         run: |
           npm run build
 
-          # Disable crawlers for preview builds.
-          echo "User-Agent: *\nDisallow: /" > ${{ env.DIST_DIR }}/robots.txt
+          if [ "${{ github.ref_name }}" = "master" ]; then
+            # Keep crawlers for production builds.
+            echo "User-Agent: *\nAllow: /" > ${{ env.DIST_DIR }}/robots.txt
+          else
+            # Disable crawlers for preview builds.
+            echo "User-Agent: *\nDisallow: /" > ${{ env.DIST_DIR }}/robots.txt
+          fi
 
       - name: Install Wrangler
         if: github.event.pull_request.head.repo.fork == false

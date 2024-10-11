@@ -6,9 +6,10 @@ function Timeline() {
             <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                 <h2 class="text-4xl font-extrabold dark:text-white">Timeline</h2>
                 <p class="my-4 text-lg font-normal text-gray-500 dark:text-gray-400">
-                    Large Language Models have not been actively used by adtech companies
-                    besides some initial experiments. However, everyone sees the potential
-                    and we believe they are soon arise.
+                    Large Language Models have not been actively used by adtech
+                    companies besides some initial experiments. However,
+                    everyone sees the potential and we believe we will soon see
+                    a new kind of ads.
                 </p>
 
                 <ol class="relative border-s border-gray-200 dark:border-gray-700">
@@ -74,9 +75,38 @@ function Timeline() {
                         description="It is reported that ChatGPT reached an estimated 100 million monthly active users in January, just two months after its launch, making it the fastest-growing consumer application in history."
                     />
                     <TimelineItem
-                        title="TBD"
-                        time="TBD"
-                        description="TBD: Other models, using LLMs in search engines, announcing ads, research papers about LLM ads."
+                        title="Google Research publishes a paper on LLM ads"
+                        time="October 2023"
+                        description="The research exlores auction mechanisms for AI-generated content."
+                        buttonText="Read the paper"
+                        buttonLink="https://arxiv.org/abs/2310.10826"
+                    />
+                    <TimelineItem
+                        title="Google redesigns search and starts rolling out AI Overviews"
+                        time="May 2024"
+                        description="Google users will see an AI-generated summary at the top of many of their search results."
+                    />
+                    <TimelineItem
+                        title="Google starts experimenting with ads in AI Overview"
+                        time="May 2024"
+                        description="The ads are contextual, but they are not blended in the response."
+                    />
+                    <TimelineItem
+                        title="Introducing Bing generative search"
+                        time="June 2024"
+                        description="LLM answers are now a part of Bing search results."
+                    />
+                    <TimelineItem
+                        title="Copilot responses with ads"
+                        time="October 2024"
+                        description="Copilot will now contain ads, but for now they are shown separately."
+                    />
+                    <TimelineItem
+                        title="LLM ads blended in responses"
+                        time="Soon"
+                        description="We are about to see the raise of ads blended in LLM responses."
+                        buttonText="Check out the demo"
+                        buttonLink="/demo.html"
                     />
                 </ol>
                 <p class="my-4 text-sm font-normal italic text-gray-500 dark:text-gray-400">
@@ -104,7 +134,7 @@ function TimelineItem(props) {
                 class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
             </div>
             <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                {props.year}
+                {props.time}
             </time>
             <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                 {props.title}
