@@ -16,7 +16,9 @@ export async function onRequestPost(context) {
         throw new Error('productName and productDescription are required');
     }
 
-    const prompt = createPrompt(json.prompt, json.baselineResponse, json.productName, json.productDescription);
+    const subtle = !!json.subtle;
+
+    const prompt = createPrompt(json.prompt, json.baselineResponse, json.productName, json.productDescription, subtle);
 
     const data = await completion(prompt, context.env.API_TOKEN);
 
@@ -29,14 +31,18 @@ export async function onRequestPost(context) {
     });
 }
 
-function createPrompt(prompt, baselineResponse, productName, productDescription) {
+function createPrompt(prompt, baselineResponse, productName, productDescription, subtle) {
+    const subtletyClause = subtle ?
+        `Focus on answering the question, there shouldn't be too much advertisment in
+the output.` : `You can actively push the advertised product to the reader.`;
+
     return `Please modify the ORIGINAL ANSWER to the QUESTION so that it
 includes advertising of the ADVERISER.
 
 Make sure to connect the answer and the advertisement very naturally,
 not something like appending the ads after just answering the question.
-Focus on answering the question, there shouldn't be too much advertisment in the
-output.
+
+${subtletyClause}
 
 QUESTION:
 ${prompt}

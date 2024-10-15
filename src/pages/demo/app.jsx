@@ -434,7 +434,15 @@ function Auction(props) {
     const [loading, setLoading] = createSignal(false);
     const [error, setError] = createSignal(false);
 
-    const loadAdResponse = async (e) => {
+    const loadSubtleAd = async (e) => {
+        loadAdResponse(e, true);
+    }
+
+    const loadAggressiveAd = async (e) => {
+        loadAdResponse(e, false);
+    }
+
+    const loadAdResponse = async (e, subtle) => {
         e.preventDefault();
 
         setError(false);
@@ -453,6 +461,7 @@ function Auction(props) {
                     baselineResponse: props.store.baselineResponse,
                     productName: advert.productName,
                     productDescription: advert.productDescription,
+                    subtle: subtle,
                 }),
             });
 
@@ -467,8 +476,6 @@ function Auction(props) {
         } finally {
             setLoading(false);
         }
-
-
     }
 
     return (
@@ -514,8 +521,13 @@ function Auction(props) {
             <Show when={!props.store.adResponse}>
                 <Show when={!loading()}>
                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        onClick={loadAdResponse}>
-                        Show response with ad
+                        onClick={loadSubtleAd}>
+                        Show subtle ad
+                    </button>
+
+                    <button class="ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        onClick={loadAggressiveAd}>
+                        Show aggressive ad
                     </button>
                 </Show>
 

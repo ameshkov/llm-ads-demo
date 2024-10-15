@@ -32,7 +32,8 @@ Please identify the advertising in the RESPONSE and if you find any, rephrase
 the RESPONSE to remove the advertising. Please try to retain as much of original
 response as possible and not lose the quality of the response.
 
-Respond with the modified response.
+Respond with the modified response, but don't say that this is a modified
+response.
 
 QUESTION:
 ${prompt}
