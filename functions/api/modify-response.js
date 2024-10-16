@@ -39,6 +39,9 @@ includes advertising of the PRODUCT.
 Make sure to connect the answer and the advertisement very naturally,
 not something like appending the ads after just answering the question.
 
+Respond with the modified answer ONLY and don't mention that you did anything
+to it in the response.
+
 ${subtletyClause}
 
 QUESTION:
