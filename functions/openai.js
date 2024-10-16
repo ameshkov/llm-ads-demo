@@ -32,5 +32,9 @@ export async function completion(prompt, apiToken, responseFormat = null) {
 
     const data = await response.json();
 
-    return data;
+    if (!data.choices || data.choices.length === 0) {
+        throw new Error('no response from the API');
+    }
+
+    return data.choices[0].message.content;
 }

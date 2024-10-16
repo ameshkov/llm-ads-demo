@@ -13,13 +13,9 @@ export async function onRequest(context) {
         throw new Error('prompt is required');
     }
 
-    const data = await completion(prompt, context.env.API_TOKEN);
-
-    if (!data.choices || data.choices.length === 0) {
-        throw new Error('no response from the API');
-    }
+    const text = await completion(prompt, context.env.API_TOKEN);
 
     return Response.json({
-        text: data.choices[0].message.content,
+        text: text,
     });
 }

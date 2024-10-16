@@ -46,6 +46,19 @@ function Prompt(props) {
 
         setLoading(true);
         setError(false);
+
+        props.setStore({
+            prompt: null,
+            baselineResponse: null,
+            advertisers: null,
+            predict: false,
+            auction: false,
+            adResponse: null,
+            adResponseDiff: null,
+            adParts: null,
+            adGuardResponse: null,
+        });
+
         props.setStore('prompt', prompt);
 
         try {
@@ -90,26 +103,24 @@ function Prompt(props) {
                         placeholder="Enter your question">What is a large language model?</textarea>
                 </div>
 
-                <Show when={!props.store.baselineResponse}>
-                    <Show when={!loading()}>
-                        <button type="submit"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Submit
-                        </button>
-                    </Show>
+                <Show when={!loading()}>
+                    <button type="submit"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Submit
+                    </button>
+                </Show>
 
-                    <Show when={loading()}>
-                        <div
-                            class="px-3 py-1 w-40 text-xs text-center font-medium leading-none text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">
-                            Thinking...
-                        </div>
-                    </Show>
+                <Show when={loading()}>
+                    <div
+                        class="px-3 py-1 w-40 text-xs text-center font-medium leading-none text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">
+                        Thinking...
+                    </div>
+                </Show>
 
-                    <Show when={error()}>
-                        <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
-                            <span class="font-medium">Oh, snapp!</span> Please try again later.
-                        </p>
-                    </Show>
+                <Show when={error()}>
+                    <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                        <span class="font-medium">Oh, snapp!</span> Please try again later.
+                    </p>
                 </Show>
             </form>
         </li>
@@ -125,6 +136,16 @@ function BaselineResponse(props) {
 
         setLoading(true);
         setError(false);
+
+        props.setStore({
+            advertisers: null,
+            predict: false,
+            auction: false,
+            adResponse: null,
+            adResponseDiff: null,
+            adParts: null,
+            adGuardResponse: null,
+        });
 
         try {
             const response = await fetch('/api/find-advertisers', {
@@ -185,26 +206,24 @@ function BaselineResponse(props) {
                 baseline response.
             </p>
 
-            <Show when={!props.store.advertisers}>
-                <Show when={!loading()}>
-                    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        onClick={findAdvertisers}>
-                        Find advertisers
-                    </button>
-                </Show>
+            <Show when={!loading()}>
+                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    onClick={findAdvertisers}>
+                    Find advertisers
+                </button>
+            </Show>
 
-                <Show when={loading()}>
-                    <div
-                        class="px-3 py-1 w-40 text-xs text-center font-medium leading-none text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">
-                        Looking for them...
-                    </div>
-                </Show>
+            <Show when={loading()}>
+                <div
+                    class="px-3 py-1 w-40 text-xs text-center font-medium leading-none text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">
+                    Looking for them...
+                </div>
+            </Show>
 
-                <Show when={error()}>
-                    <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
-                        <span class="font-medium">Oh, snapp!</span> Please try again later.
-                    </p>
-                </Show>
+            <Show when={error()}>
+                <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                    <span class="font-medium">Oh, snapp!</span> Please try again later.
+                </p>
             </Show>
         </li>
     )
@@ -448,6 +467,13 @@ function Auction(props) {
         setError(false);
         setLoading(true);
 
+        props.setStore({
+            adResponse: null,
+            adResponseDiff: null,
+            adParts: null,
+            adGuardResponse: null,
+        });
+
         try {
             const advert = advertisers[0].originalAdvertiser;
 
@@ -518,31 +544,29 @@ function Auction(props) {
                 </table>
             </div>
 
-            <Show when={!props.store.adResponse}>
-                <Show when={!loading()}>
-                    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        onClick={loadSubtleAd}>
-                        Show subtle ad
-                    </button>
+            <Show when={!loading()}>
+                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    onClick={loadSubtleAd}>
+                    Show subtle ad
+                </button>
 
-                    <button class="ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        onClick={loadAggressiveAd}>
-                        Show aggressive ad
-                    </button>
-                </Show>
+                <button class="ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    onClick={loadAggressiveAd}>
+                    Show aggressive ad
+                </button>
+            </Show>
 
-                <Show when={loading()}>
-                    <div
-                        class="px-3 py-1 w-40 text-xs text-center font-medium leading-none text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">
-                        Waiting for AdBot...
-                    </div>
-                </Show>
+            <Show when={loading()}>
+                <div
+                    class="px-3 py-1 w-40 text-xs text-center font-medium leading-none text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">
+                    Waiting for AdBot...
+                </div>
+            </Show>
 
-                <Show when={error()}>
-                    <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
-                        <span class="font-medium">Oh, snapp!</span> Please try again later.
-                    </p>
-                </Show>
+            <Show when={error()}>
+                <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                    <span class="font-medium">Oh, snapp!</span> Please try again later.
+                </p>
             </Show>
         </li>
     )
@@ -647,6 +671,11 @@ function AdResponseDiff(props) {
         setLoading(true);
         setError(false);
 
+        props.setStore({
+            adParts: null,
+            adGuardResponse: null,
+        });
+
         try {
             const response = await fetch('/api/identify-ads', {
                 method: 'POST',
@@ -696,26 +725,24 @@ function AdResponseDiff(props) {
                 ads in the modified response.
             </p>
 
-            <Show when={!props.store.adParts}>
-                <Show when={!loading()}>
-                    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        onClick={identifyAds}>
-                        Identify ads
-                    </button>
-                </Show>
+            <Show when={!loading()}>
+                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    onClick={identifyAds}>
+                    Identify ads
+                </button>
+            </Show>
 
-                <Show when={loading()}>
-                    <div
-                        class="px-3 py-1 w-40 text-xs text-center font-medium leading-none text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">
-                        Waiting for AdGuardBot...
-                    </div>
-                </Show>
+            <Show when={loading()}>
+                <div
+                    class="px-3 py-1 w-40 text-xs text-center font-medium leading-none text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">
+                    Waiting for AdGuardBot...
+                </div>
+            </Show>
 
-                <Show when={error()}>
-                    <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
-                        <span class="font-medium">Oh, snapp!</span> Please try again later.
-                    </p>
-                </Show>
+            <Show when={error()}>
+                <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                    <span class="font-medium">Oh, snapp!</span> Please try again later.
+                </p>
             </Show>
         </li>
     )
@@ -725,11 +752,23 @@ function IdentifiedAds(props) {
     const [loading, setLoading] = createSignal(false);
     const [error, setError] = createSignal(false);
 
-    const blockAds = async (e) => {
+    const blockAdsOpenAI = async (e) => {
+        return blockAds(e, false);
+    }
+
+    const blockAdsLocalAI = async (e) => {
+        return blockAds(e, true);
+    }
+
+    const blockAds = async (e, localAI) => {
         e.preventDefault();
 
         setLoading(true);
         setError(false);
+
+        props.setStore({
+            adGuardResponse: null,
+        });
 
         try {
             const response = await fetch('/api/block-ads', {
@@ -740,6 +779,7 @@ function IdentifiedAds(props) {
                 body: JSON.stringify({
                     prompt: props.store.prompt,
                     response: props.store.adResponse,
+                    localAI: localAI,
                 }),
             });
 
@@ -825,26 +865,35 @@ function IdentifiedAds(props) {
                 What's next? Now let's try removing the ads!
             </p>
 
-            <Show when={!props.store.adGuardResponse}>
-                <Show when={!loading()}>
-                    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        onClick={blockAds}>
-                        Block ads!
-                    </button>
-                </Show>
+            <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                There are two options to try. The default one uses OpenAI API,
+                an expensive option. The "local AI" option uses a smaller
+                Llama2 model capable of running on device.
+            </p>
 
-                <Show when={loading()}>
-                    <div
-                        class="px-3 py-1 w-40 text-xs text-center font-medium leading-none text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">
-                        Waiting for AdGuardBot...
-                    </div>
-                </Show>
+            <Show when={!loading()}>
+                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    onClick={blockAdsOpenAI}>
+                    Block ads
+                </button>
 
-                <Show when={error()}>
-                    <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
-                        <span class="font-medium">Oh, snapp!</span> Please try again later.
-                    </p>
-                </Show>
+                <button class="ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    onClick={blockAdsLocalAI}>
+                    Block ads with local AI
+                </button>
+            </Show>
+
+            <Show when={loading()}>
+                <div
+                    class="px-3 py-1 w-40 text-xs text-center font-medium leading-none text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200">
+                    Waiting for AdGuardBot...
+                </div>
+            </Show>
+
+            <Show when={error()}>
+                <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                    <span class="font-medium">Oh, snapp!</span> Please try again later.
+                </p>
             </Show>
         </li>
     )

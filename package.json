@@ -1,7 +1,7 @@
 {
   "name": "llm-ads-demo",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -14,8 +14,8 @@
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
     "vite": "^5.4.8",
-    "vite-plugin-cloudflare-functions": "^0.7.0",
-    "vite-plugin-solid": "^2.10.2"
+    "vite-plugin-solid": "^2.10.2",
+    "vite-plugin-cloudflare-functions": "github:ameshkov/vite-plugin-cloudflare-functions#dist"
   },
   "dependencies": {
     "diff": "^7.0.0",

@@ -14,13 +14,9 @@ export async function onRequestPost(context) {
 
     const prompt = createPrompt(json.prompt, json.baselineResponse);
 
-    const data = await completion(prompt, context.env.API_TOKEN, responseFormat);
+    const text = await completion(prompt, context.env.API_TOKEN, responseFormat);
 
-    if (!data.choices || data.choices.length === 0) {
-        throw new Error('no response from the API');
-    }
-
-    const responseJson = JSON.parse(data.choices[0].message.content);
+    const responseJson = JSON.parse(text);
 
     return Response.json(responseJson);
 }

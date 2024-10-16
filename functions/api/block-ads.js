@@ -14,14 +14,10 @@ export async function onRequestPost(context) {
 
     const prompt = createPrompt(json.prompt, json.response);
 
-    const data = await completion(prompt, context.env.API_TOKEN);
-
-    if (!data.choices || data.choices.length === 0) {
-        throw new Error('no response from the API');
-    }
+    const text = json.localAI ? await runAI(context, prompt) : await completion(prompt, context.env.API_TOKEN);
 
     return Response.json({
-        text: data.choices[0].message.content,
+        text: text,
     });
 }
 
@@ -32,12 +28,32 @@ Please identify the advertising in the RESPONSE and if you find any, rephrase
 the RESPONSE to remove the advertising. Please try to retain as much of original
 response as possible and not lose the quality of the response.
 
-Respond with the modified response, but don't say that this is a modified
-response.
+Respond with the rephrased response ONLY and don't mention that you did anything
+to it in the response.
 
 QUESTION:
 ${prompt}
 
 ORIGINAL ANSWER:
 ${response}`
+}
+
+async function runAI(context, prompt) {
+    const messages = [
+        {
+            role: 'system',
+            content: 'You are an assistant that identifies and removes advertising from text.'
+        },
+        {
+            role: "user",
+            content: prompt,
+        },
+    ];
+    const response = await context.env.AI.run('@cf/meta/llama-2-7b-chat-int8', { messages });
+
+    // It's hard to get rid of the "Here is what I done" with llama so
+    // there's that:
+    const text = response.response.replace(/^Here is.*?:\s*/, '');
+
+    return text;
 }

@@ -30,6 +30,9 @@ export default defineConfig({
                     // Change to `prod` to use OpenAI instead of stubs.
                     ENV: 'local',
                 },
+                ai: [
+                    'AI'
+                ],
             }
         })
     ]

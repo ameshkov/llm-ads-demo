@@ -30,5 +30,6 @@ the Github Actions workflow in `.github/workflows/deploy.yml` for more details.
 If you want to deploy the project on your own, you'll need to do the following:
 
 * Add a secret to the Cloudflare Pages project with your OpenAI token: `API_TOKEN`.
+* Add Workers AI binding to `AI` in the project settings.
 * Set up **strict** budget and rate limiting rules in OpenAI since the page
   functions are not protected.
