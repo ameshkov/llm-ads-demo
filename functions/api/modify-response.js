@@ -33,11 +33,12 @@ export async function onRequestPost(context) {
 
 function createPrompt(prompt, baselineResponse, productName, productDescription, subtle) {
     const subtletyClause = subtle ?
-        `Focus on answering the question, there shouldn't be too much advertisment in
-the output.` : `You can actively push the advertised product to the reader.`;
+        `Try to be subtle with advertising and make as little changes as possible.`
+        :
+        `You can actively push the advertised product to the reader.`;
 
     return `Please modify the ORIGINAL ANSWER to the QUESTION so that it
-includes advertising of the ADVERISER.
+includes advertising of the PRODUCT.
 
 Make sure to connect the answer and the advertisement very naturally,
 not something like appending the ads after just answering the question.
@@ -50,7 +51,7 @@ ${prompt}
 ORIGINAL ANSWER:
 ${baselineResponse}
 
-ADVERTISER:
+PRODUCT:
 - Product name: ${productName}
 - Product description: ${productDescription}`
 }

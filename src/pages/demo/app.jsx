@@ -305,7 +305,7 @@ function PredictRow(props) {
                 {props.advertiser.predict}%
             </td>
             <td class="px-6 py-4">
-                {props.advertiser.welfare}%
+                {props.advertiser.satisfactoryRate}%
             </td>
             <td class="px-6 py-4">
                 {props.advertiser.score}
@@ -325,8 +325,8 @@ function Predict(props) {
         return {
             productName: `${advertiser.productName} by ${advertiser.companyName}`,
             predict: advertiser.predict,
-            welfare: advertiser.welfare,
-            score: advertiser.predict * advertiser.welfare
+            satisfactoryRate: advertiser.satisfactoryRate,
+            score: advertiser.predict * advertiser.satisfactoryRate
         }
     }).sort((a, b) => (b.score) - (a.score));
 
@@ -342,14 +342,14 @@ function Predict(props) {
             <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
                 In order to run the auction the prediction module needs to
                 run first and predict the likelihood of a person clicking on
-                the ad and the social welfare score.
+                the ad and the satisfactory rate.
             </p>
 
             <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                <b>Social welfare</b> is a new concept, a type of welfare
-                function that balances economic efficiency and fairness. To make
-                it simple, this function is an attempt to avoid considerable
-                decrease in response quality.
+                <b>Satisfactory rate</b> is a new concept, a metric that shows
+                how satisfactory is the response with ads of that product for
+                the user. To make it simple, this function is an attempt to
+                avoid considerable decrease in response quality.
             </p>
 
             <div class="relative overflow-x-auto">
@@ -363,7 +363,7 @@ function Predict(props) {
                                 Click prediction
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Social welfare
+                                Satisfactory rate
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Overall score
@@ -424,9 +424,9 @@ function Auction(props) {
     const advertisers = props.store.advertisers.map(advertiser => {
         return {
             productName: `${advertiser.productName} by ${advertiser.companyName}`,
-            predict: advertiser.predict * advertiser.welfare,
+            predict: advertiser.predict * advertiser.satisfactoryRate,
             bid: advertiser.bid,
-            result: advertiser.bid * advertiser.predict * advertiser.welfare,
+            result: advertiser.bid * advertiser.predict * advertiser.satisfactoryRate,
             originalAdvertiser: advertiser,
         }
     }).sort((a, b) => b.result - a.result);

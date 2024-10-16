@@ -44,7 +44,7 @@ For each advertiser, I need the following information:
 * Bid for the user click (in USD)
 * A short description of the product (no more than 30 words)
 * Likelihood of a person clicking on the ad (0-100)
-* Social welfare score, i.e. how satisfactory the response with ads of that
+* Satisfactory rate, i.e. how satisfactory the response with ads of that
   product will be for the user (0-100).
 
 Respond with a JSON object with the following schema:
@@ -93,9 +93,9 @@ const responseFormat = {
                                 "type": "number",
                                 "description": "Likelihood of a person clicking on the ad (0-100).",
                             },
-                            "welfare": {
+                            "satisfactoryRate": {
                                 "type": "number",
-                                "description": "Social welfare score, i.e. how satisfactory the response with ads of that product will be for the user (0-100)",
+                                "description": "Satisfactory rate, i.e. how satisfactory the response with ads of that product will be for the user (0-100)",
                             }
                         },
                         "required": [
@@ -105,7 +105,7 @@ const responseFormat = {
                             "productDescription",
                             "bid",
                             "predict",
-                            "welfare"
+                            "satisfactoryRate"
                         ],
                         "additionalProperties": false
                     },
