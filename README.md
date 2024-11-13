@@ -3,7 +3,7 @@
 This is a demo project that demonstrates how LLM ads can be implemented and
 also how they can be blocked.
 
-You can check out the demo here [llm-ads-demo.pages.dev](https://llm-ads-demo.pages.dev/).
+You can check out the demo here [llm-afds-demo.pages.dev](https://llm-afds-demo.pages.dev/).
 
 ## How to run locally
 
